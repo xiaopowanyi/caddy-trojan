@@ -26,5 +26,5 @@ jobs:
       - name: Upload Go test results
         uses: actions/upload-artifact@v4
         with:
-          name: Go-results-${{ matrix.go-version }}
-          path: TestResults-${{ matrix.go-version }}   
+          name: caddy-trojan-${{ matrix.go-version }}
+          path: caddy-trojan/caddy-trojan
