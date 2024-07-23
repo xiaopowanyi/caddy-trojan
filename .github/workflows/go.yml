@@ -25,7 +25,9 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
           cache: true
-          cache-dependency-path: **/go.sum          
+          cache-dependency-path: |
+            **/go.sum
+            **/go.mod
     
       - name: Build Xcaddy
         run: go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
