@@ -10,9 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        goos: [linux]
-        goarch: [amd64, arm64]
+        os: [linux]
+        arch: [amd64, arm64]
         go-version: [ '1.22.x' ]
+        include:
+          - arch: amd64
+            XCADDY_BIN_PATH: ./cmd/caddy-trojan/caddy-trojan         
+          - arch: arm64
+            XCADDY_BIN_PATH: ./cmd/caddy-trojan/caddy-trojan
+          
     steps:
       - uses: actions/checkout@v4
       - name: Setup Go
@@ -20,11 +26,13 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
       - name: Build Xcaddy
+        working-directory: ./cmd/caddy-trojan
         run: go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
       - name: Build with xcaddy
+        working-directory: ./cmd/caddy-trojan
         run: xcaddy build --with github.com/imgk/caddy-trojan
-      - name: Upload Go test results
+      - name: Publish Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: caddy-trojan-${{ matrix.go-version }}
-          path: caddy-trojan/caddy-trojan
+          name: caddy-trojan_${{ runner.os }}_go${{ matrix.go-version }}_${{ matrix.arch }}
+          path: ${{ matrix.XCADDY_BIN_PATH }}
