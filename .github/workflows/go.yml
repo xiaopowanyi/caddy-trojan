@@ -13,7 +13,6 @@ jobs:
         os: [linux]
         arch: [amd64, arm64]
         go-version: [ '1.22.x' ]
-        path: ./caddy-trojan
     
 
     steps:
@@ -28,10 +27,10 @@ jobs:
         run: go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
     
       - name: Build with xcaddy
-        run: xcaddy build --with github.com/imgk/caddy-trojan --output ${{ matrix.path }}
+        run: xcaddy build --with github.com/imgk/caddy-trojan
         
       - name: Publish Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: caddy-trojan_${{ matrix.os }}_go${{ matrix.go-version }}_${{ matrix.arch }}
-          path: ${{ matrix.path }}
+          path: /home/runner/work/caddy-trojan/caddy-trojan/
