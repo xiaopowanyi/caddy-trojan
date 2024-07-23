@@ -22,7 +22,7 @@ jobs:
       - name: Build Xcaddy
         run: go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
       - name: Build with xcaddy
-        run: ./xcaddy build --with github.com/imgk/caddy-trojan
+        run: xcaddy build --with github.com/imgk/caddy-trojan
       - name: Upload Go test results
         uses: actions/upload-artifact@v4
         with:
