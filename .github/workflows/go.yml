@@ -1,8 +1,9 @@
 name: Go CI
 
-on:
-  release:
-    types: [push]
+
+on: 
+    workflow_dispatch:
+    push:
 
 jobs:
   build-go-binary:
