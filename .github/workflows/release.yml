@@ -3,6 +3,9 @@ name: Build Caddy-Trojan
 
 on: 
     workflow_dispatch:
+    push:
+      paths:
+        - 'sha'
 
 jobs:
   build-caddy-trojan:
