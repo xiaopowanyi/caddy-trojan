@@ -47,4 +47,4 @@ jobs:
           tag_name: ${{ steps.build_caddy_trojan.outputs.my_caddy_version }}
           draft: false
           prerelease: false
-          files: caddy_trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz
+          files: ~/*.tar.gz
