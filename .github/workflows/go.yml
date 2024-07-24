@@ -35,10 +35,7 @@ jobs:
           cd ~/output
           xcaddy build --with github.com/imgk/caddy-trojan
           echo "my_caddy_version=$(./caddy version | awk '{print $1}')" >> $GITHUB_OUTPUT
-          cd ..
-          tar -czvf caddy_trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz output/*
-          pwd
-          ls
+          tar -czvf ../caddy_trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz .
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
