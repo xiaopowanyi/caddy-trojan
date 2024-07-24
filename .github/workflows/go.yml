@@ -37,4 +37,16 @@ jobs:
           echo "my_caddy_version=$(./caddy version | awk '{print $1}')" >> $GITHUB_OUTPUT
           cd ~
           tar -czvf caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz ~/output
-          echo ${{ steps.build_caddy_trojan.outputs.my_caddy_version }}
+          
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          body: New Release.
+          tag_name: ${{ steps.build_caddy_trojan.outputs.my_caddy_version }}
+          name: caddy-trojan_${{ GITHUB_ENV.CADDY_VERSION }}
+          draft: false
+          prerelease: false
+          files: |
+            ~/output/caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz
