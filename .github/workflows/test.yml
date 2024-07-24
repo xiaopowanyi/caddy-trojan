@@ -16,7 +16,8 @@ jobs:
 
     - name: Check
       run: |
-        apt install jq
+        sudo apt update -y
+        sudo apt install jq -y
         chmod +x update_sha.sh
         ./update_sha.sh
 
