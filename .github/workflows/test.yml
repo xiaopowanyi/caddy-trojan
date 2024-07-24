@@ -1,0 +1,34 @@
+name: Check
+
+
+on: 
+    workflow_dispatch:
+    schedule:
+      - cron: '30 2 5 * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Check
+      run: |
+        apt install jq
+        chmod +x update_sha.sh
+        ./update_sha.sh
+
+    - name: Commit files
+      run: |
+         git config --local user.email "1141101853@qq.com"
+         git config --local user.name "xiaopowanyi"
+         git pull
+         git add .
+         git commit -m "update files"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+         github_token: ${{ secrets.TOKEN }}
+         branch: main
