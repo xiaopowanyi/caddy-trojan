@@ -6,7 +6,7 @@ on:
     push:
 
 jobs:
-  build-go-binary:
+  build-caddy-trojan:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -36,13 +36,13 @@ jobs:
           tar -czvf caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz ~/output/
           
         
-    - name: Create Release
-      uses: softprops/action-gh-release@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      with:
-        body: TODO New Release.
-        draft: false
-        prerelease: false
-        files: |
-          ~/output/caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          body: TODO New Release.
+          draft: false
+          prerelease: false
+          files: |
+            ~/output/caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz
