@@ -13,7 +13,6 @@ jobs:
         os: [linux]
         arch: [amd64, arm64]
         go-version: [1.22.x]
-        caddy-path: [~/output]
     
 
     steps:
@@ -32,8 +31,8 @@ jobs:
     
       - name: Build Caddy-Trojan
         run: |
-          mkdir -p ${{ caddy-path }}
-          cd ${{ caddy-path }}
+          mkdir -p ~/output
+          cd ~/output
           xcaddy build --with github.com/imgk/caddy-trojan
           pwd
           ls
