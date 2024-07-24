@@ -33,7 +33,7 @@ jobs:
           mkdir -p ~/output
           cd ~/output
           xcaddy build --with github.com/imgk/caddy-trojan
-          echo "MY_CADDY_VERSION=$(./caddy version | awk '{print $1}')" >> $GITHUB_ENV
+          echo "MY_CADDY_VERSION=$(./caddy version | cut -d ' ' -f 1)" >> $GITHUB_ENV
           cd ~
           tar -czvf caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz ~/output
           echo $MY_CADDY_VERSION
