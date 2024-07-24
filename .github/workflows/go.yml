@@ -1,4 +1,4 @@
-name: Go CI
+name: Build Caddy-Trojan
 
 
 on: 
@@ -6,7 +6,7 @@ on:
     push:
 
 jobs:
-  build-go-binary:
+  build-caddy-trojan:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -29,11 +29,20 @@ jobs:
       - name: Build Xcaddy
         run: go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
     
-      - name: Build with xcaddy
-        run: xcaddy build --with github.com/imgk/caddy-trojan
+      - name: Build Caddy-Trojan
+        run: |
+          mkdir -p ~/output
+          xcaddy build --with github.com/imgk/caddy-trojan --output ~/output/
+          tar -czvf caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz ~/output/
+          
         
-      - name: Publish Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz
-          path: /home/runner/work/caddy-trojan/caddy-trojan/
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      with:
+        body: TODO New Release.
+        draft: false
+        prerelease: false
+        files: |
+          ~/output/caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz
