@@ -36,16 +36,3 @@ jobs:
           xcaddy build --with github.com/imgk/caddy-trojan
           pwd
           ls
-          # tar -czvf caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz ${{ caddy-path }}/caddy
-          
-        
-      # - name: Create Release
-        # uses: softprops/action-gh-release@v2
-        # env:
-          # GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        # with:
-          # body: TODO New Release.
-          # draft: false
-          # prerelease: false
-          # files: |
-            # ~/output/caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz
