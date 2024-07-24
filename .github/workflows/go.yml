@@ -49,4 +49,4 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            ~/output/caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz
+            caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz
