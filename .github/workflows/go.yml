@@ -32,8 +32,8 @@ jobs:
       - name: Build Caddy-Trojan
         run: |
           mkdir -p ~/output
-          xcaddy build --with github.com/imgk/caddy-trojan --output ~/output/
-          tar -czvf caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz ~/output/
+          xcaddy build --with github.com/imgk/caddy-trojan --output ~/output/caddy
+          tar -czvf caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz ~/output/caddy
           
         
       - name: Create Release
