@@ -29,11 +29,12 @@ jobs:
         run: go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
     
       - name: Build Caddy-Trojan
+        id: build_caddy_trojan
         run: |
           mkdir -p ~/output
           cd ~/output
           xcaddy build --with github.com/imgk/caddy-trojan
-          echo "MY_CADDY_VERSION=$(./caddy version | cut -d ' ' -f 1)" >> $GITHUB_ENV
+          echo "my_caddy_version=$(./caddy version | awk '{print $1}')" >> $GITHUB_OUTPUT
           cd ~
           tar -czvf caddy-trojan_${{ matrix.os }}_${{ matrix.arch }}.tar.gz ~/output
-          echo $MY_CADDY_VERSION
+          echo ${{ steps.build_caddy_trojan.outputs.my_caddy_version }}
